@@ -17,7 +17,6 @@ import {
 
 import theme from './src/global/styles/theme';
 
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
