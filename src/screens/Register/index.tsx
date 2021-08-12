@@ -12,6 +12,7 @@ import uuid from 'react-native-uuid';
 
 import { useForm } from "react-hook-form";
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import { InputForm } from '../../components/Forms/InputForm';
 import { Button } from '../../components/Forms/Button';
@@ -33,6 +34,18 @@ interface FormData {
     name: string;
     amount: string;
 }
+
+type RootStackParamList = {
+    Register: undefined;
+    Dashboard: undefined;
+};
+
+type HomeScreenNavigationProp = StackNavigationProp<
+    RootStackParamList,
+    'Register'
+>;
+
+const { navigate } = useNavigation<HomeScreenNavigationProp>()
 
 const schema = Yup.object().shape({
     name: Yup
@@ -98,7 +111,7 @@ export function Register() {
 
             const data = await AsyncStorage.getItem(dataKey);
             const currentData = data ? JSON.parse(data) : [];
-            
+
             const dataFormatted = [
                 ...currentData,
                 newTransaction
