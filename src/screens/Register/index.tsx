@@ -11,8 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
 
 import { useForm } from "react-hook-form";
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 import { InputForm } from '../../components/Forms/InputForm';
 import { Button } from '../../components/Forms/Button';
@@ -36,16 +36,15 @@ interface FormData {
 }
 
 type RootStackParamList = {
-    Register: undefined;
-    Dashboard: undefined;
+    Listagem: undefined;
+    Cadastrar: undefined;
+    Resumo: undefined;
 };
 
-type HomeScreenNavigationProp = StackNavigationProp<
+type RegisterScreenNavigationProp = BottomTabNavigationProp<
     RootStackParamList,
-    'Register'
+    'Cadastrar'
 >;
-
-const { navigate } = useNavigation<HomeScreenNavigationProp>()
 
 const schema = Yup.object().shape({
     name: Yup
@@ -66,7 +65,7 @@ export function Register() {
         name: 'Categoria'
     });
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<RegisterScreenNavigationProp>();
 
     const {
         control,

@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getBottomSpace } from "react-native-iphone-x-helper";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { HighlightCard } from "../../components/HighlightCard";
