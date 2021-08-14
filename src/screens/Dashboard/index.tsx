@@ -1,7 +1,7 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { useFocusEffect } from '@react-navigation/native';
 
 import { HighlightCard } from "../../components/HighlightCard";
 import { TransactionCard, TransactionCardProps } from "../../components/TransactionCard";
@@ -38,12 +38,12 @@ export function Dashboard() {
         const transactionsFormatted: DataListProps[] = transactions
             .map((item: DataListProps) => {
                 const amount = Number(item.amount)
-                    .toLocaleString('pt-BR', {
+                    .toLocaleString('pt-Br', {
                         style: 'currency',
                         currency: 'BRL'
                     });
 
-                const date = Intl.DateTimeFormat('pt-BR', {
+                const date = Intl.DateTimeFormat('pt-Br', {
                     day: '2-digit',
                     month: '2-digit',
                     year: '2-digit'
@@ -65,6 +65,10 @@ export function Dashboard() {
     useEffect(() => {
         LoadTransactions();
     }, []);
+
+    useFocusEffect(useCallback(() => {
+        LoadTransactions();
+    },[]));
 
     return (
         <Container>
